@@ -11,14 +11,13 @@ class _ChartsState extends State<Charts> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text(
-            "b",
-            style: TextStyle(
-              fontSize: 50,
-            ),
+      body: SafeArea(
+        child: Column(
+          children: [
+
+          ],
         ),
-      ),
+      )
     );
   }
 }

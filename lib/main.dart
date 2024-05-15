@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:general_waste_classifier/view/pages/accounts_page.dart';
-import 'package:general_waste_classifier/view/pages/charts.dart';
+import 'package:general_waste_classifier/view/pages/recommendation.dart';
 import 'package:general_waste_classifier/view/components/general.dart';
 import 'view/pages/homepage.dart';
 

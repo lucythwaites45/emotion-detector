@@ -3,10 +3,10 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:general_waste_classifier/view/pages/accounts_page.dart';
-import 'package:general_waste_classifier/view/pages/charts.dart';
+import 'package:general_waste_classifier/view/pages/recommendation.dart';
 import 'package:general_waste_classifier/view/components/floating_camera_button.dart';
 import 'package:general_waste_classifier/view/pages/homepage.dart';
-import '../pages/charts.dart';
+import '../pages/recommendation.dart';
 
 class GeneralPage extends StatefulWidget {
   const GeneralPage({super.key});
@@ -23,8 +23,8 @@ class _GeneralPageState extends State<GeneralPage> {
         currentIndex: 1,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.chart_bar),
-            label: "charts",
+            icon: Icon(CupertinoIcons.arrowtriangle_right_circle),
+            label: "recommendations",
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
@@ -46,28 +46,6 @@ class _GeneralPageState extends State<GeneralPage> {
         } else {
           return const AccountPage();
         }
-        // switch (index) {
-        //   case 0:
-        //     return CupertinoTabView(
-        //       builder: (context) {
-        //         return const Charts();
-        //       },
-        //     );
-        //   case 1:
-        //     return CupertinoTabView(
-        //       builder: (context) {
-        //         return const HomePage();
-        //       },6
-        //     );
-        //   case 2:
-        //     return CupertinoTabView(
-        //       builder: (context) {
-        //         return const AccountPage();
-        //       },
-        //     );
-        //   default:
-        //     return null;
-        // }
       },
     );
   }
