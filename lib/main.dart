@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:general_waste_classifier/view/pages/accounts_page.dart';
-import 'package:general_waste_classifier/view/pages/recommendation.dart';
+import 'package:general_waste_classifier/view/not_using/accounts_page.dart';
+import 'package:general_waste_classifier/view/not_using/recommendation.dart';
 import 'package:general_waste_classifier/view/components/general.dart';
-import 'view/pages/homepage.dart';
+import 'view/not_using/homepage.dart';
 
 void main() {
   runApp(const MyApp());

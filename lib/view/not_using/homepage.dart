@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../components/floating_camera_button.dart';
+import 'floating_camera_button.dart';
 import '../components/general.dart';
-import '../components/bottomSheet.dart';
+import 'bottomSheet.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomePage extends StatefulWidget {

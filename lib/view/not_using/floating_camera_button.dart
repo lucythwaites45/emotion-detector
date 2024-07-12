@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:general_waste_classifier/view/pages/homepage.dart';
+import 'package:general_waste_classifier/view/not_using/homepage.dart';
 
 class FloatingCameraButton extends StatefulWidget {
   const FloatingCameraButton({super.key});

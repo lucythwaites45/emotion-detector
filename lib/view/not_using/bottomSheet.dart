@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../pages/login_page.dart';
+import 'login_page.dart';
 
 class CustomizedBottomSheet extends StatefulWidget {
   const CustomizedBottomSheet({super.key});

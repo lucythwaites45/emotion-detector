@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import '../components/displaySettingSheet.dart';
+import 'displaySettingSheet.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
