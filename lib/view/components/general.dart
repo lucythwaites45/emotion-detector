@@ -2,49 +2,41 @@ import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:general_waste_classifier/view/not_using/accounts_page.dart';
-import 'package:general_waste_classifier/view/not_using/recommendation.dart';
-import 'package:general_waste_classifier/view/not_using/floating_camera_button.dart';
-import 'package:general_waste_classifier/view/not_using/homepage.dart';
-import '../not_using/recommendation.dart';
 
-class GeneralPage extends StatefulWidget {
-  const GeneralPage({super.key});
 
-  @override
-  State<GeneralPage> createState() => _GeneralPageState();
-}
 
-class _GeneralPageState extends State<GeneralPage> {
+class GeneralPage extends StatelessWidget {
+  const GeneralPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          body: Column(
-            children: [
-              Image.asset(
-                'images/login_image.png', // Replace with your local image path
-                height: 100, // Adjust the height as needed
-              ),
-              const TabBar(
-                tabs: [
-                  Tab(text: 'Login'),
-                  Tab(text: 'Signup'),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(''),
+        ),
+        body: Column(
+          children: [
+            Image.asset(
+              'images/login_image.png', // Replace with your local image path
+              height: 150, // Adjust the height as needed
+            ),
+            const TabBar(
+              tabs: [
+                Tab(text: 'Login'),
+                Tab(text: 'Signup'),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  LoginCard(),
+                  SignupCard(),
                 ],
               ),
-              const Expanded(
-                child: TabBarView(
-                  children: [
-                    LoginCard(),
-                    SignupCard(),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -52,7 +44,7 @@ class _GeneralPageState extends State<GeneralPage> {
 }
 
 class LoginCard extends StatelessWidget {
-  const LoginCard({super.key});
+  const LoginCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +67,7 @@ class LoginCard extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Handle login logic here
+                  Navigator.pushNamed(context, '/home');
                 },
                 child: const Text('Login'),
               ),
@@ -87,8 +79,8 @@ class LoginCard extends StatelessWidget {
   }
 }
 
-class SignupCard extends StatelessWidget  {
-  const SignupCard({super.key});
+class SignupCard extends StatelessWidget {
+  const SignupCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +107,7 @@ class SignupCard extends StatelessWidget  {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Handle signup logic here
+                  Navigator.pushNamed(context, '/home');
                 },
                 child: const Text('Signup'),
               ),

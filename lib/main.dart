@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:general_waste_classifier/view/not_using/accounts_page.dart';
 import 'package:general_waste_classifier/view/not_using/recommendation.dart';
 import 'package:general_waste_classifier/view/components/general.dart';
-import 'view/not_using/homepage.dart';
-
+import 'package:general_waste_classifier/view/components/home.dart';
+import 'package:general_waste_classifier/view/components/homepage.dart';
+import 'package:general_waste_classifier/view/components/profile.dart';
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,15 +22,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         backgroundColor: Colors.white,
       ),
-      home: const GeneralPage(),
-      // routes: {
-      //   '/homepage': (context) => const HomePage(),
-      //   '/chartspage': (context) => const Charts(),
-      //   '/accountpage': (context) => const AccountPage(),
-      // },
+      initialRoute: '/', // Optionally set initial route
+      routes: {
+        '/': (context) => const GeneralPage(),
+        '/home': (context) => const Home(),
+        '/homepage': (context) => const HomePage(),// Define the route for Home widget
+        '/profile': (context) => const Profile(),
+      },
     );
   }
 }
-
-
-
