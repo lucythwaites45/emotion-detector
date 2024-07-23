@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,10 +20,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late List<CameraDescription> cameras;
+  late CameraDescription firstCamera;
+
+  @override
+  void initState() {
+    super.initState();
+    availableCameras().then((cameras) {
+      setState(() {
+        this.cameras = cameras;
+        this.firstCamera = cameras.first;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     int currentPageIndex = 1;
     final ThemeData theme = Theme.of(context);
+
+    if (cameras.isEmpty) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -81,10 +101,10 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add padding here
             child: Column(
-              children: const <Widget>[
+              children:  <Widget>[
                 CardResults(),
                 SizedBox(height: 16), // Add space between the cards
-                CardMoreInfo(),
+                CardMoreInfo(camera: firstCamera),
               ],
             ),
           ),
@@ -132,7 +152,8 @@ class CardResults extends StatelessWidget {
 }
 
 class CardMoreInfo extends StatelessWidget {
-  const CardMoreInfo({Key? key}) : super(key: key);
+  final CameraDescription camera;
+  const CardMoreInfo({Key? key, required this.camera}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -151,9 +172,9 @@ class CardMoreInfo extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  // Add your onPressed logic here
+                  Navigator.pushNamed(context, '/take_picture');
                 },
-                child: const Text('See More'),
+                child: const Text('Take a Picture'),
               ),
             ],
           ),
@@ -205,8 +226,74 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Fill this out in the next steps.
-    return Container();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Take a picture')),
+      // You must wait until the controller is initialized before displaying the
+      // camera preview. Use a FutureBuilder to display a loading spinner until the
+      // controller has finished initializing.
+      body: FutureBuilder<void>(
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            // If the Future is complete, display the preview.
+            return CameraPreview(_controller);
+          } else {
+            // Otherwise, display a loading indicator.
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        // Provide an onPressed callback.
+        onPressed: () async {
+          // Take the Picture in a try / catch block. If anything goes wrong,
+          // catch the error.
+          try {
+            // Ensure that the camera is initialized.
+            await _initializeControllerFuture;
+
+            // Attempt to take a picture and get the file `image`
+            // where it was saved.
+            final image = await _controller.takePicture();
+
+            if (!context.mounted) return;
+
+            // If the picture was taken, display it on a new screen.
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DisplayPictureScreen(
+                  // Pass the automatically generated path to
+                  // the DisplayPictureScreen widget.
+                  imagePath: image.path,
+                ),
+              ),
+            );
+          } catch (e) {
+            // If an error occurs, log the error to the console.
+            print(e);
+          }
+        },
+        child: const Icon(Icons.camera_alt),
+      ),
+    );
+  }
+}
+
+
+
+class DisplayPictureScreen extends StatelessWidget {
+  final String imagePath;
+
+  const DisplayPictureScreen({super.key, required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Display the Picture')),
+      // The image is stored as a file on the device. Use the `Image.file`
+      // constructor with the given path to display the image.
+      body: Image.file(File(imagePath)),
+    );
   }
 }
 
